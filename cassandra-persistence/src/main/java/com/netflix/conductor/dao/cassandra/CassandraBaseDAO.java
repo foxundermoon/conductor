@@ -38,6 +38,7 @@ import static com.netflix.conductor.util.Constants.TABLE_WORKFLOWS;
 import static com.netflix.conductor.util.Constants.TASK_ID_KEY;
 import static com.netflix.conductor.util.Constants.TOTAL_PARTITIONS_KEY;
 import static com.netflix.conductor.util.Constants.TOTAL_TASKS_KEY;
+import static com.netflix.conductor.util.Constants.UPDATE_COUNT_KEY;
 import static com.netflix.conductor.util.Constants.WORKFLOW_ID_KEY;
 
 /**
@@ -63,7 +64,7 @@ import static com.netflix.conductor.util.Constants.WORKFLOW_ID_KEY;
  * PRIMARY KEY (task_id)
  * );
  */
-public class CassandraBaseDAO {
+public abstract class CassandraBaseDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger(CassandraBaseDAO.class);
 
     private final ObjectMapper objectMapper;
@@ -110,6 +111,7 @@ public class CassandraBaseDAO {
                 .addColumn(PAYLOAD_KEY, DataType.text())
                 .addStaticColumn(TOTAL_TASKS_KEY, DataType.cint())
                 .addStaticColumn(TOTAL_PARTITIONS_KEY, DataType.cint())
+                .addStaticColumn(UPDATE_COUNT_KEY, DataType.cint())
                 .getQueryString();
     }
 
